@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: everest
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/CODERPP10/openeverest-gitops.git
+    targetRevision: main
+    path: charts/everest-db-namespace
+    helm:
+      releaseName: everest
+      valueFiles:
+        - values/everest.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: everest
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - Prune=false
+      - ServerSideApply=true
+    automated: {}

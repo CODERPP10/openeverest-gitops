@@ -1,0 +1,15 @@
+apiVersion: v2
+appVersion: 1.15.2
+description: A Helm chart for Everest Custom Resource Definitions (CRDs).
+maintainers:
+- email: mayank.shah@percona.com
+  name: mayankshah1607
+- email: oksana.grishchenko@percona.com
+  name: oksana-grishchenko
+- email: diogo.recharte@percona.com
+  name: recharte
+- email: maxim.kondratenko@percona.com
+  name: maxkondr
+name: everest-crds
+type: application
+version: 1.15.2

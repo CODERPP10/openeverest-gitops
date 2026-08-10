@@ -1,0 +1,17 @@
+cleanupOnUninstall: false
+common:
+  global: {}
+compatibility:
+  openshift: false
+hooks:
+  csvCleanup: {}
+  dbResourcesCleanup: {}
+  image: percona/everest-helmtools:0.0.1
+  operatorsInstaller: {}
+namespaceOverride: ""
+olm:
+  namespace: everest-olm
+postgresql: true
+psmdb: true
+pxc: true
+telemetry: true
