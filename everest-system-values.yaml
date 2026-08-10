@@ -1,0 +1,554 @@
+COMPUTED VALUES:
+common:
+  global: {}
+compatibility:
+  openshift: false
+createMonitoringResources: true
+dataImporters:
+  perconaPGOperator:
+    enabled: true
+  perconaPSMDBOperator:
+    enabled: true
+  perconaPXCOperator:
+    enabled: true
+dbNamespace:
+  enabled: false
+  namespaceOverride: everest
+everest-crds:
+  enabled: false
+hooks:
+  image: percona/everest-helmtools:0.0.1
+  lbcCleanup: {}
+  pspCleanup: {}
+  upgradeChecks:
+    image: ghcr.io/openeverest/everestctl
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+  - host: chart-example.local
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  ingressClassName: ""
+  tls: []
+kube-state-metrics:
+  affinity: {}
+  annotations: {}
+  automountServiceAccountToken: true
+  autosharding:
+    enabled: false
+  collectors:
+  - certificatesigningrequests
+  - configmaps
+  - cronjobs
+  - daemonsets
+  - deployments
+  - endpoints
+  - horizontalpodautoscalers
+  - ingresses
+  - jobs
+  - leases
+  - limitranges
+  - mutatingwebhookconfigurations
+  - namespaces
+  - networkpolicies
+  - nodes
+  - persistentvolumeclaims
+  - persistentvolumes
+  - poddisruptionbudgets
+  - pods
+  - replicasets
+  - replicationcontrollers
+  - resourcequotas
+  - secrets
+  - services
+  - statefulsets
+  - storageclasses
+  - validatingwebhookconfigurations
+  - volumeattachments
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+  containers: []
+  customLabels:
+    everest.percona.com/type: monitoring
+  customResourceState:
+    config: {}
+    enabled: false
+  enabled: true
+  extraArgs:
+  - --custom-resource-state-config-file=/etc/customresourcestate/config
+  extraManifests: []
+  fullnameOverride: kube-state-metrics
+  global:
+    imagePullSecrets: []
+    imageRegistry: ""
+  hostNetwork: false
+  image:
+    pullPolicy: IfNotPresent
+    registry: registry.k8s.io
+    repository: kube-state-metrics/kube-state-metrics
+    sha: ""
+    tag: ""
+  imagePullSecrets: []
+  initContainers: []
+  kubeRBACProxy:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+    enabled: false
+    extraArgs: []
+    image:
+      pullPolicy: IfNotPresent
+      registry: quay.io
+      repository: brancz/kube-rbac-proxy
+      sha: ""
+      tag: v0.18.0
+    resources: {}
+    volumeMounts: []
+  kubeTargetVersionOverride: ""
+  kubeconfig:
+    enabled: false
+  livenessProbe:
+    failureThreshold: 3
+    httpGet:
+      httpHeaders: []
+      scheme: http
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  metricAllowlist: []
+  metricAnnotationsAllowList: []
+  metricDenylist: []
+  metricLabelsAllowlist:
+  - pods=[app.kubernetes.io/component,app.kubernetes.io/instance,app.kubernetes.io/managed-by,app.kubernetes.io/name,app.kubernetes.io/part-of]
+  - persistentvolumeclaims=[app.kubernetes.io/component,app.kubernetes.io/instance,app.kubernetes.io/managed-by,app.kubernetes.io/name,app.kubernetes.io/part-of]
+  - jobs=[app.kubernetes.io/component,app.kubernetes.io/instance,app.kubernetes.io/managed-by,app.kubernetes.io/name,app.kubernetes.io/part-of]
+  namespaceOverride: everest-monitoring
+  namespaces: ""
+  namespacesDenylist: ""
+  networkPolicy:
+    enabled: false
+    flavor: kubernetes
+  nodeSelector: {}
+  podAnnotations: {}
+  podDisruptionBudget: {}
+  podLabels: {}
+  podSecurityPolicy:
+    additionalVolumes: []
+    annotations: {}
+    enabled: false
+  prometheus:
+    monitor:
+      additionalLabels: {}
+      annotations: {}
+      enabled: false
+      http:
+        bearerTokenFile: ""
+        bearerTokenSecret: {}
+        enableHttp2: false
+        honorLabels: false
+        interval: ""
+        metricRelabelings: []
+        proxyUrl: ""
+        relabelings: []
+        scheme: ""
+        scrapeTimeout: ""
+        tlsConfig: {}
+      jobLabel: ""
+      labelLimit: 0
+      labelNameLengthLimit: 0
+      labelValueLengthLimit: 0
+      metrics:
+        bearerTokenFile: ""
+        bearerTokenSecret: {}
+        enableHttp2: false
+        honorLabels: false
+        interval: ""
+        metricRelabelings: []
+        proxyUrl: ""
+        relabelings: []
+        scheme: ""
+        scrapeTimeout: ""
+        tlsConfig: {}
+      namespace: ""
+      namespaceSelector: []
+      podTargetLabels: []
+      sampleLimit: 0
+      selectorOverride: {}
+      targetLabels: []
+      targetLimit: 0
+  prometheusScrape: true
+  rbac:
+    create: true
+    extraRules: []
+    useClusterRole: true
+  readinessProbe:
+    failureThreshold: 3
+    httpGet:
+      httpHeaders: []
+      scheme: http
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  releaseLabel: false
+  releaseNamespace: false
+  replicas: 1
+  resources: {}
+  revisionHistoryLimit: 10
+  securityContext:
+    enabled: true
+    fsGroup: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    runAsUser: 65534
+    seccompProfile:
+      type: RuntimeDefault
+  selectorOverride:
+    app.kubernetes.io/name: kube-state-metrics
+  selfMonitor:
+    enabled: false
+  service:
+    annotations: {}
+    clusterIP: ""
+    ipDualStack:
+      enabled: false
+      ipFamilies:
+      - IPv6
+      - IPv4
+      ipFamilyPolicy: PreferDualStack
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+    nodePort: 0
+    port: 8080
+    type: ClusterIP
+  serviceAccount:
+    annotations: {}
+    automountServiceAccountToken: true
+    create: true
+    imagePullSecrets: []
+  startupProbe:
+    enabled: false
+    failureThreshold: 3
+    httpGet:
+      httpHeaders: []
+      scheme: http
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  tolerations: []
+  topologySpreadConstraints: []
+  verticalPodAutoscaler:
+    controlledResources: []
+    enabled: false
+    maxAllowed: {}
+    minAllowed: {}
+  volumeMounts:
+  - mountPath: /etc/customresourcestate
+    name: customresourcestate-config
+    readOnly: true
+  volumes:
+  - configMap:
+      name: customresource-config-ksm
+    name: customresourcestate-config
+monitoring:
+  admissionWebhooks:
+    certManager:
+      ca:
+        commonName: ca.validation.victoriametrics
+        duration: 63800h0m0s
+        secretTemplate: {}
+        subject: {}
+      cert:
+        commonName: ""
+        duration: 45800h0m0s
+        secretTemplate: {}
+        subject: {}
+      enabled: false
+      issuer: {}
+    enabled: false
+    enabledCRDValidation:
+      vlogs: true
+      vmagent: true
+      vmalert: true
+      vmalertmanager: true
+      vmalertmanagerconfig: true
+      vmauth: true
+      vmcluster: true
+      vmrule: true
+      vmsingle: true
+      vmuser: true
+    keepTLSSecret: true
+    policy: Fail
+    tls: {}
+  affinity: {}
+  allowedMetricsEndpoints:
+  - /metrics
+  - /metrics/resources
+  annotations: {}
+  certManager:
+    enabled: false
+  crds:
+    cleanup:
+      enabled: false
+      image:
+        pullPolicy: IfNotPresent
+        repository: bitnami/kubectl
+        tag: ""
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 56Mi
+    enabled: true
+    global:
+      cluster:
+        dnsDomain: cluster.local.
+      compatibility:
+        openshift:
+          adaptSecurityContext: auto
+      image:
+        registry: ""
+      imagePullSecrets: []
+    plain: true
+  enabled: true
+  env: []
+  envFrom: []
+  extraArgs: {}
+  extraContainers: []
+  extraHostPathMounts: []
+  extraLabels: {}
+  extraObjects: []
+  extraVolumeMounts: []
+  extraVolumes: []
+  fullnameOverride: vm-operator
+  global:
+    cluster:
+      dnsDomain: cluster.local.
+    compatibility:
+      openshift:
+        adaptSecurityContext: auto
+    image:
+      registry: ""
+    imagePullSecrets: []
+  hostNetwork: false
+  image:
+    pullPolicy: IfNotPresent
+    registry: ""
+    repository: victoriametrics/operator
+    tag: ""
+    variant: ""
+  imagePullSecrets: []
+  lifecycle: {}
+  logLevel: info
+  nameOverride: ""
+  namespaceOverride: everest-monitoring
+  nodeSelector: {}
+  operator:
+    disable_prometheus_converter: false
+    enable_converter_ownership: false
+    prometheus_converter_add_argocd_ignore_annotations: false
+    useCustomConfigReloader: false
+  podDisruptionBudget:
+    enabled: false
+    labels: {}
+  podLabels: {}
+  podSecurityContext:
+    enabled: true
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  priorityClassName: ""
+  probe:
+    liveness:
+      failureThreshold: 3
+      initialDelaySeconds: 5
+      periodSeconds: 15
+      tcpSocket:
+        port: probe
+      timeoutSeconds: 5
+    readiness:
+      failureThreshold: 3
+      httpGet:
+        port: probe
+      initialDelaySeconds: 5
+      periodSeconds: 15
+      timeoutSeconds: 5
+    startup: {}
+  rbac:
+    aggregatedClusterRoles:
+      enabled: true
+      labels:
+        admin:
+          rbac.authorization.k8s.io/aggregate-to-admin: "true"
+        view:
+          rbac.authorization.k8s.io/aggregate-to-view: "true"
+    create: true
+  replicaCount: 1
+  resources: {}
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    enabled: true
+    readOnlyRootFilesystem: true
+  service:
+    annotations: {}
+    clusterIP: ""
+    externalIPs: ""
+    externalTrafficPolicy: ""
+    healthCheckNodePort: ""
+    ipFamilies: []
+    ipFamilyPolicy: ""
+    labels: {}
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+    servicePort: 8080
+    type: ClusterIP
+    webhookPort: 9443
+  serviceAccount:
+    automountServiceAccountToken: true
+    create: true
+    name: ""
+  serviceMonitor:
+    annotations: {}
+    basicAuth: {}
+    enabled: false
+    extraLabels: {}
+    interval: ""
+    relabelings: []
+    scheme: ""
+    scrapeTimeout: ""
+    tlsConfig: {}
+    vm: true
+  terminationGracePeriodSeconds: 30
+  tolerations: []
+  topologySpreadConstraints: []
+  victoria-metrics-common:
+    global:
+      cluster:
+        dnsDomain: cluster.local.
+      compatibility:
+        openshift:
+          adaptSecurityContext: auto
+      image:
+        registry: ""
+      imagePullSecrets: []
+    unitTest: false
+  watchNamespaces: []
+namespaceOverride: ""
+olm:
+  catalogSourceImage: ghcr.io/openeverest/openeverest-catalog
+  global: {}
+  image: percona/olm@sha256:13e8f4e919e753faa7da35a9064822381098bcd44acc284877bf0964ceecbfd5
+  install: true
+  namespace: everest-olm
+  namespaceOverride: everest-olm
+  packageserver:
+    tls:
+      caCert: ""
+      tlsCert: ""
+      tlsKey: ""
+      type: helm
+operator:
+  affinity: {}
+  enableLeaderElection: true
+  env: []
+  healthProbeAddr: :8081
+  image: ghcr.io/openeverest/openeverest-operator
+  init: true
+  metricsAddr: 127.0.0.1:8080
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 128Mi
+    requests:
+      cpu: 5m
+      memory: 64Mi
+  tolerations: []
+  topologySpreadConstraints: []
+  webhook:
+    certs:
+      ca.crt: ""
+      tls.crt: ""
+      tls.key: ""
+    preserveTLSCerts: true
+pmm:
+  enabled: false
+  nameOverride: pmm
+pmm3:
+  enabled: false
+  pmm:
+    nameOverride: pmm3
+server:
+  affinity: {}
+  apiRequestsRateLimit: 100
+  env: []
+  image: ghcr.io/openeverest/openeverest
+  initialAdminPassword: ""
+  jwtKey: ""
+  nodeSelector: {}
+  oidc: {}
+  rbac:
+    enabled: false
+    policy: |
+      g, admin, role:admin
+  resources:
+    limits:
+      cpu: 200m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 20Mi
+  service:
+    loadBalancerClass: ""
+    name: everest
+    port: 8080
+    type: ClusterIP
+  tls:
+    certificate:
+      additionalHosts: []
+      create: false
+      domain: ""
+      duration: ""
+      issuer:
+        group: ""
+        kind: ""
+        name: ""
+      privateKey:
+        algorithm: RSA
+        encoding: PKCS1
+        rotationPolicy: Never
+        size: 2048
+      renewBefore: ""
+      secretTemplate:
+        annotations: {}
+        labels: {}
+      usages: []
+    enabled: false
+    secret:
+      certs:
+        tls.crt: ""
+        tls.key: ""
+      name: everest-server-tls
+  tolerations: []
+  topologySpreadConstraints: []
+telemetry: true
+upgrade:
+  crdChecks: true
+  preflightChecks: false
+versionMetadataURL: https://check.percona.com

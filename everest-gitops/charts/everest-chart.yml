@@ -1,0 +1,13 @@
+NAME: everest
+CHART: everest-db-namespace
+VERSION: 1.15.2
+APP_VERSION: 1.15.2
+ANNOTATIONS:
+LABELS: modifiedAt=1781391340,name=everest,owner=helm,status=deployed,version=1
+DEPENDENCIES: common
+NAMESPACE: everest
+REVISION: 1
+STATUS: deployed
+DEPLOYED_AT: 2026-06-13T22:54:07Z
+APPLY_METHOD: client-side apply (defaulted)
+

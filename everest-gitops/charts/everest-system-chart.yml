@@ -1,0 +1,15 @@
+NAME: everest-system
+CHART: openeverest
+VERSION: 1.15.2
+APP_VERSION: 1.15.2
+ANNOTATIONS: artifacthub.io/links=- name: Documentation
+  url: https://openeverest.io/documentation/current/
+,helm.sh/release-max-history=5
+LABELS: modifiedAt=1781391194,name=everest-system,owner=helm,status=deployed,version=1
+DEPENDENCIES: common,kube-state-metrics,monitoring,olm
+NAMESPACE: everest-system
+REVISION: 1
+STATUS: deployed
+DEPLOYED_AT: 2026-06-13T22:53:04Z
+APPLY_METHOD: client-side apply (defaulted)
+
