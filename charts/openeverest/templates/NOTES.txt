@@ -1,0 +1,57 @@
+Thank you for installing OpenEverest (v{{ .Chart.AppVersion }})!
+
+
+  ▄▄▄▄▄                      ▄▄▄▄▄▄▄                                     
+▄███████▄                   ███▀▀▀▀▀                                ██   
+███   ███ ████▄ ▄█▀█▄ ████▄ ███▄▄    ██ ██ ▄█▀█▄ ████▄ ▄█▀█▄ ▄█▀▀▀ ▀██▀▀ 
+███▄▄▄███ ██ ██ ██▄█▀ ██ ██ ███      ██▄██ ██▄█▀ ██ ▀▀ ██▄█▀ ▀███▄  ██   
+ ▀█████▀  ████▀ ▀█▄▄▄ ██ ██ ▀███████  ▀█▀  ▀█▄▄▄ ██    ▀█▄▄▄ ▄▄▄█▀  ██   
+          ██                                                                                                      
+          ▀▀                                             openeverest.io                                                     
+
+{{- if .Release.IsInstall }}
+{{- $pfSrcPort := "8080" }}
+{{- $pfDstPort := "8080" }}
+{{- $pfUrlProto := "http" }}
+{{- if .Values.server.tls.enabled }}
+{{- $pfSrcPort = "8443" }}
+{{- $pfDstPort = "443" }}
+{{- $pfUrlProto = "https" }}
+{{- end }}
+{{- $pfCmd := printf "kubectl port-forward svc/%s %s:%s -n %s" .Values.server.service.name $pfSrcPort $pfDstPort .Release.Namespace }}
+{{- $pfUrl := printf "%s://localhost:%s" $pfUrlProto $pfSrcPort }}
+
+Follow the steps below to get started:
+{{ if not .Values.dbNamespace.enabled }}
+PROVISION A NAMESPACE FOR YOUR DATABASES
+=========================================
+
+Install a namespace for your databases using the following command:
+
+    helm install everest openeverest/everest-db-namespace --namespace everest --create-namespace
+
+{{- end }}
+
+RETRIEVE THE INITIAL ADMIN PASSWORD
+====================================
+
+Run the following command to fetch the initial admin password:
+
+    kubectl get secret everest-accounts -n everest-system -o jsonpath='{.data.users\.yaml}' | base64 --decode | yq '.admin.passwordHash'
+
+**Note:** The initial password is stored in plain text. For security, change it immediately using the following command:
+
+    everestctl accounts set-password -u admin
+
+ACCESS THE OPENEVEREST UI
+======================
+
+To access the web UI, set up port-forwarding and visit {{ $pfUrl }} in your browser:
+
+    {{ $pfCmd }}
+{{- end }}
+
+{{- if .Release.IsUpgrade }}
+OpenEverest has been successfully upgraded to version {{ .Chart.AppVersion }}!
+{{- end }}
+

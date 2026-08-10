@@ -1,0 +1,17 @@
+apiVersion: v2
+dependencies:
+- name: pmm
+  repository: https://percona.github.io/percona-helm-charts
+  version: 1.4.*
+description: PMM3 subchart wrapper
+maintainers:
+- email: mayank.shah@percona.com
+  name: mayankshah1607
+- email: oksana.grishchenko@percona.com
+  name: oksana-grishchenko
+- email: diogo.recharte@percona.com
+  name: recharte
+- email: maxim.kondratenko@percona.com
+  name: maxkondr
+name: pmm3
+version: 0.0.1
