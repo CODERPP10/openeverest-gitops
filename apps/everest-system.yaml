@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: everest-system
       valueFiles:
-        - values/everest-system.yaml
+        - ../../values/everest-system.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: everest-system
