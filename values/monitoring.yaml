@@ -1,0 +1,31 @@
+# Disable heavy components if you only need metrics
+victoria-metrics-operator:
+  enabled: true
+
+# Single-node VictoriaMetrics TSDB
+vmsingle:
+  enabled: true
+  spec:
+    retentionPeriod: "14d"
+    storage:
+      resources:
+        requests:
+          storage: 10Gi
+
+# Lightweight agent to scrape metrics
+vmagent:
+  enabled: true
+  spec:
+    scrapeInterval: "30s" # Relaxed interval to reduce CPU load
+
+# Optional: Disable default Grafana if using vmui directly over Tailscale
+grafana:
+  enabled: true
+  adminPassword: "change-me-homelab"
+
+# Minimal exporters
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true
